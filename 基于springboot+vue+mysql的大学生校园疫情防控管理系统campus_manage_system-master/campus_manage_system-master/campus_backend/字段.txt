@@ -1,0 +1,113 @@
+sequelize字段选择
+1. Sequelize.STRING - VARCHAR(255)
+2. Sequelize.INTEGER - INTEGER
+3. Sequelize.FLOAT - FLOAT
+4. Sequelize.DOUBLE - DOUBLE
+5. Sequelize.DATE - DATETIME
+
+sequelize创表配置
+1. timestamps: false, 是否添加时间戳
+2. paranoid: true, 是否物理删除
+3. underscored: true, 是否强制驼峰命名
+4. freezeTableName: true, 是否允许修改表名
+
+sequelize创表命令
+npx sequelize-cli db:migrate
+npx sequelize-cli seed:create --name init-role
+npx sequelize-cli db:seed --seed 20211210121019-init-role
+npx sequelize-cli db:seed:all
+
+文欢的流程
+1.创表注意加s
+2.models过滤时间, migrations去除时间
+3.npx sequelize-cli db:migrate
+4.npx sequelize-cli seed:create --name init-role
+4.npx sequelize-cli seed:create --name init-personal_info
+4.npx sequelize-cli seed:create --name init-lowrick_manage
+4.npx sequelize-cli seed:create --name init-highrick_manage
+4.npx sequelize-cli seed:create --name init-close_manage
+4.npx sequelize-cli seed:create --name init-injection_manage
+4.npx sequelize-cli seed:create --name init-journey_data
+4.npx sequelize-cli seed:create --name init-health_record
+4.npx sequelize-cli seed:create --name init-health_message
+4.npx sequelize-cli seed:create --name init-health_infoer
+4.npx sequelize-cli seed:create --name init-domestic_notice
+4.npx sequelize-cli seed:create --name init-campus-notices
+4.npx sequelize-cli seed:create --name init-author
+4.npx sequelize-cli seed:create --name init-journal
+5.npx sequelize-cli db:seed --seed 20211210121019-init-role
+5.npx sequelize-cli db:seed --seed 20211210161610-init-personal_info
+5.npx sequelize-cli db:seed --seed 20211211023731-init-lowrick_manage
+5.npx sequelize-cli db:seed --seed 20211211031556-init-highrick_manage
+5.npx sequelize-cli db:seed --seed 20211211033110-init-close_manage
+5.npx sequelize-cli db:seed --seed 20211211034504-init-infection_manage
+5.npx sequelize-cli db:seed --seed 20211211041201-init-journey_data
+5.npx sequelize-cli db:seed --seed 20211211050958-init-health_record
+5.npx sequelize-cli db:seed --seed 20211211070541-init-health_message
+5.npx sequelize-cli db:seed --seed 20211211072648-init-health_infoer
+5.npx sequelize-cli db:seed --seed 20211211075632-init-domestic_notice
+5.npx sequelize-cli db:seed --seed 20211211081240-init-campus-notices
+5.npx sequelize-cli db:seed --seed 20211211082647-init-author
+5.npx sequelize-cli db:seed --seed 20211211085659-init-journal
+
+
+
+表字段
+journal(日志表)--已完成接口
+id:INTEGER,j_id:INTEGER,j_name:STRING,,j_role:INTEGER,,j_browser:STRING,,j_ip:STRING,,j_login_time:DATE,,j_login_status:STRING
+npx sequelize-cli model:create --name journals --attributes j_stuid:STRING,j_name:STRING,j_role:INTEGER,j_browser:STRING,j_ip:STRING,j_ipname:STRING,j_date:DATE,j_status:STRING,pid:INTEGER
+
+author(作者表)--已完成接口
+id:INTEGER,a_name:STRING,a_phone:INTEGER,a_email:STRING,a_start_time:DATE,a_end_time:DATE,
+npx sequelize-cli model:create --name authors --attributes a_name:STRING,a_phone:INTEGER,a_email:STRING,a_start_time:DATE,a_end_time:DATE
+
+campus_notice(校园疫情通知表)--已完成接口
+id:INTEGER,n_title:STRING,n_content:STRING,n_date:DATETIME,pid:INTEGER
+npx sequelize-cli model:create --name campus_notices --attributes n_title:STRING,n_content:STRING,n_date:DATE,pid:INTEGER
+
+domestic_notice(国内疫情通知表)--已完成接口
+id:INTEGER,n_title:STRING,n_date:DATETIME,pid:INTEGER
+npx sequelize-cli model:create --name domestic_notices --attributes n_title:STRING,n_date:DATE,pid:INTEGER
+
+health_infoer(健康申报人表)--已完成接口
+id:INTEGER,i_name:STRING,i_idcard:STRING,i_phone:INTEGER,i_gender:INTEGER,i_birth:DATETIME,i_nationality:STRING,i_domicile:STRING,i_native:STRING,i_address:STRING
+pid:INTEGER
+npx sequelize-cli model:create --name health_infoers --attributes i_name:STRING,i_idcard:STRING,i_phone:INTEGER,i_gender:INTEGER,i_birth:DATE,i_nationality:STRING,i_domicile:STRING,i_native:STRING,i_address:STRING
+
+health_message(健康信息表)--已完成接口
+id:INTEGER,m_stuid:STRING,m_name:STRING,m_college:STRING,m_class:STRING,m_recent_resi:STRING,m_recent_touch:STRING,m_touch_date:DATETIME,m_health_status:STRING,m_status_des:STRING,pid:INTEGER
+npx sequelize-cli model:create --name health_messages --attributes m_stuid:STRING,m_name:STRING,m_college:STRING,m_class:STRING,m_recent_resi:STRING,m_recent_touch:STRING,m_touch_date:DATE,m_health_status:STRING,m_status_des:STRING,pid:INTEGER
+
+health_record(健康接种记录表)--已完成接口
+id:INTEGER,r_vaccine:STRING,r_inject:INTEGER,r_rum:INTEGER,r_manufacturer:STRING,r_vac_unit:STRING,r_vac_date:DATE,pid:INTEGER
+npx sequelize-cli model:create --name health_records --attributes r_stuid:STRING,r_name:STRING,r_vaccine:STRING,r_inject:INTEGER,r_rum:INTEGER,r_manufacturer:STRING,r_vac_unit:STRING,r_vac_date:DATE,pid:INTEGER
+
+highrick_manage(高风险管理表)--已完成接口
+id:INTEGER,m_stuid:INTEGER,m_gender:INTEGER,m_college:STRING,m_class:STRING,m_building:STRING,m_building_num:INTEGER,m_recent_place:STRING,m_recent_history:STRING,m_health_status:STRING
+npx sequelize-cli model:create --name highrick_manages --attributes m_stuid:INTEGER,m_name:STRING,m_gender:INTEGER,m_college:STRING,m_class:STRING,m_building:STRING,m_building_num:INTEGER,m_recent_place:STRING,m_recent_history:STRING,m_health_status:STRING
+
+close_manage(密切接触者管理表)--已完成接口
+id:INTEGER,m_stuid:INTEGER,m_name:STRING,m_gender:INTEGER,m_college:STRING,m_class:STRING,m_building:STRING,m_building_num:INTEGER,m_recent_place:STRING,m_recent_history:STRING,m_health_status:STRING
+npx sequelize-cli model:create --name close_manages --attributes m_stuid:INTEGER,m_name:STRING,m_gender:INTEGER,m_college:STRING,m_class:STRING,m_building:STRING,m_building_num:INTEGER,m_recent_place:STRING,m_recent_history:STRING,m_health_status:STRING
+
+infection_manage(确诊管理表)--已完成接口
+id:INTEGER,m_stuid:INTEGER,m_name:STRING,m_gender:INTEGER,m_college:STRING,m_class:STRING,m_building:STRING,m_build_num:INTEGER,m_inject_source:STRING,m_inject_date:DATETIME
+npx sequelize-cli model:create --name infection_manages --attributes m_stuid:INTEGER,m_name:STRING,m_gender:INTEGER,m_college:STRING,m_class:STRING,m_building:STRING,m_build_num:INTEGER,m_inject_source:STRING,m_inject_date:DATE
+
+journey_data(行程数据表)--已完成接口
+id:INTEGER,d_stuid:STRING,d_name:STRING,d_college:STRING,d_class:STRING,d_building:STRING,d_build_num:INTEGER,d_return_num:INTEGER,d_return_date:DATETIME,d_start_area:STRING,d_arrival_area:STRING,d_in_reach:STRING,pid:INTEGER
+npx sequelize-cli model:create --name journey_datas --attributes d_stuid:STRING,d_name:STRING,d_college:STRING,d_class:STRING,d_building:STRING,d_build_num:INTEGER,d_return_num:INTEGER,d_return_date:DATE,d_start_area:STRING,d_arrival_area:STRING,d_in_reach:STRING,pid:INTEGER
+
+lowrick_manage(低风险管理表)--已完成接口
+id:INTEGER,m_stuid:INTEGER,m_name:STRING,m_gender:INTEGER,m_college:STRING,m_class:STRING,m_building:STRING,m_building_num:INTEGER,m_recent_place:STRING,m_recent_history:STRING,m_health_status:STRING
+npx sequelize-cli model:create --name lowrick_manages --attributes m_stuid:INTEGER,m_name:STRING,m_gender:INTEGER,m_college:STRING,m_class:STRING,m_building:STRING,m_building_num:INTEGER,m_recent_place:STRING,m_recent_history:STRING,m_health_status:STRING
+
+personal_info(个人信息表)--已完成接口
+id:INTEGER,i_stuid:INTEGER,i_name:STRING,i_gender:INTEGER,i_birth:DATETIME,i_nation:STRING,i_university:STRING,i_college:STRING,i_class:STRING,i_profession:STRING,i_enter_time:DATETIME,i_background:STRING,rid:INTEGER
+npx sequelize-cli model:create --name personal_infos --attributes i_stuid:INTEGER,i_name:STRING,i_gender:INTEGER,i_birth:DATE,i_nation:STRING,i_university:STRING,i_college:STRING,i_class:STRING,i_profession:STRING,i_enter_time:DATE,i_background:STRING,rid:INTEGER
+
+role(角色表)--已完成接口
+id:INTEGER,r_account:STRING,r_pwd:STRING,r_serial:STRING,r_name:STRING,r_role:INTEGER
+npx sequelize-cli model:create --name roles --attributes r_account:STRING,r_pwd:STRING,r_serial:STRING,r_name:STRING,r_role:INTEGER
+
+
